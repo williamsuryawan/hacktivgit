@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous">
-    <script
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="google-signin-client_id" 
+        content="325619263985-1hd1j92o1uhtkp72lhuvn5jhrj1amk1p.apps.googleusercontent.com">
+        <title>HacktivGit</title>
+        <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+        
+        <script
           src="https://code.jquery.com/jquery-3.3.1.min.js"
           integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
           crossorigin="anonymous"></script>
@@ -19,29 +22,81 @@
 
 </head>
 <body>
-    <div class="container-sm-12">
+    <div class="container-sm-12" id="navbar-content">
         <div class="col-12" style="background-color:greenyellow;">
             <div class="row ml-2 pt-2 pb-2">           
-                <h3>Hacktivgit by William Suryawan</h3>
+                <div class="col-9">
+                    <h3>Hacktivgit by William Suryawan</h3>
+                </div>
+                <div class="col-1">
+                    <a class="btn-edt" id="register_click" href="#">Register</a>
+                </div>
+                <div class="col-1">
+                    <a class="btn-edt" href="#" id="login_click" >Sign in</a>
+                </div>
+                <div class="col-1">
+                    <a class="btn-edt" href="#" onclick="signOut()" id="sign_out">Sign out</a>
+                </div>
             </div>
         </div>
     </div>
-    
 
-    <div class="container-sm-12 d-flex">
-        <div class="bg-light border-right col-sm-4 scrollable-menu" id="sidebar">
-            <h3> My Repositories </h3>
-            Add New Repository
-            <form method="post" id="add-repo-form">
-                <input type="text" id="name" placeholder="name" autocomplete ="off">
-                <input type="submit"> 
-            </form>
-            <br>
-            <h5> Repository Owner Name: <p id="repo-owner"> </p></h5>
-            <h5> Repository List: </h5>
-            <ul id="myrepo-list"> </ul>
-        </div>
+    <div class="container-sm-12" id="login-content">
+        <center>
+        <h2> You need to register/login to access this page. </h2>
         
+        <form id="login_form" onsubmit="login()">
+            Email:<br>
+            <input type="text" name="email" id="emailLogin">
+            <br>
+            Password:<br>
+            <input type="password" name="pw" id="pwLogin">
+            <br><br>
+            <input type="submit" value="Submit" id="submit_button">
+            <br><br>
+            <div class="g-signin2" data-onsuccess="onSignIn" id="google_signin"></div>
+            
+        </form>
+        </center>  
+        <form id="register_form" onsubmit="register()">
+            <div class="container">
+                <h1>Register</h1>
+                <hr>
+            
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Enter Email" name="email" id="emailReg" required>
+                <br>
+            
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" id="pwReg" required>
+                <br>
+
+                <input type="submit" value="Submit" id="submit_button"></input>
+            </div>
+            
+            <div class="container signin">
+                <br>
+                <p>Already have an account? <a href="#" id="sign_in">Sign in</a></p>
+            </div>
+        </form>
+    </div>
+
+    <div class="container-sm-12" id="main-content">
+        <div class="row">
+            <div class="bg-light border-right col-sm-4 scrollable-menu" id="sidebar">
+                <h3> My Repositories </h3>
+                Add New Repository
+                <form method="post" id="add-repo-form">
+                    <input type="text" id="name" placeholder="name" autocomplete ="off">
+                    <input type="submit"> 
+                </form>
+                <br>
+                <h5> Repository Owner Name: <p id="repo-owner"> </p></h5>
+                <h5> Repository List: </h5>
+                <ul id="myrepo-list"> </ul>
+            </div>
+        
+
         <div class="bg-warning col-sm-4" id="page-content">
             <h3> My Starred Repositories </h3>
                 Unstar Repo    
@@ -57,6 +112,7 @@
                 </form>
                 <ul id="starredrepo-list"> </ul>
         </div>
+
         <div class="col-sm-4" id="page-content" style="background-color:#aef5ff">
                 <h3> Find Other Repositories </h3>
                 
@@ -70,8 +126,12 @@
                 <ul id="otherrepo-list"> </ul>
         </div>
     </div>
+    </div>
 
-        
-        <script src= "./main.js"></script> 
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src= "./index.js"></script>
+    <script src= "./login.js"></script> 
+    <script src= "./main.js"></script> 
+    
 </body>
 </html>

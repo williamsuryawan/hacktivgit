@@ -1,6 +1,8 @@
+const baseURL = 'http://localhost:3000';
+
 $(document).ready(function() {
     $.ajax({
-        url: 'http://localhost:3000/repositories/starred',
+        url: `${baseURL}/repositories/starred`,
         method: 'GET'
     
     })
@@ -23,7 +25,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $.ajax({
-        url: 'http://localhost:3000/repositories?username=williamsuryawan',
+        url: `${baseURL}/repositories?username=williamsuryawan`,
         method: 'GET'
     
     })
@@ -55,7 +57,7 @@ $('#add-repo-form').submit(function() {
     console.log("add ===>", input)
         $.ajax({
             method: 'POST',
-            url: 'http://localhost3000/repositories',
+            url: `${baseURL}/repositories`,
             data: {
                 name: $('#name').val(),
                 private: false
@@ -76,7 +78,7 @@ $('#unstar-repo-form').submit(function() {
     let inputName = $('#userName').val();
     let inputRepo = $('#repoName').val();
     console.log("input: ", inputName, inputRepo);
-    let inputLink = `http://localhost:3000/repositories/unstar?username=${inputName}&repo=${inputRepo}`
+    let inputLink = `${baseURL}/repositories/unstar?username=${inputName}&repo=${inputRepo}`
     console.log(inputLink)
         $.ajax({
             method: 'DELETE',
@@ -93,7 +95,7 @@ $('#unstar-repo-form').submit(function() {
 
 function findOtherRepo(value) {
     console.log("cari repo orang lain", value)
-    let linkOtherRepo = `http://localhost:3000/repositories?username=${value}`
+    let linkOtherRepo = `${baseURL}/repositories?username=${value}`
     $.ajax({
         url: linkOtherRepo,
         method: 'GET'
@@ -121,9 +123,9 @@ function findOtherRepo(value) {
 
 function repoChange(value) {
     console.log("ada value=", value)
-    let halaman = 'http://localhost:3000/repositories/starred'
+    let halaman = `${baseURL}/repositories/starred`
     if (value) {
-        halaman = `http://localhost:3000/repositories/starred?name=${value}`
+        halaman = `${baseURL}/repositories/starred?name=${value}`
         console.log("masuk====")
     }
     console.log(halaman, 'halaman')
